@@ -16,9 +16,16 @@ struct Disjoint_sets
 
 	int root(int a)
 	{
+		int ret = a;
+		while (father[ret] != ret)
+			ret = father[ret];
 		while (father[a] != a)
+		{
+			int b = a;
 			a = father[a];
-		return a;
+			father[b] = ret;
+		}
+		return ret;
 	}
 
 	void join(int a, int b)
