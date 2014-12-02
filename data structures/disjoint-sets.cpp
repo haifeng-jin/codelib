@@ -14,7 +14,7 @@ struct Disjoint_sets
 		}
 	}
 
-	int find(int a)
+	int root(int a)
 	{
 		while (father[a] != a)
 			a = father[a];
@@ -23,7 +23,7 @@ struct Disjoint_sets
 
 	void join(int a, int b)
 	{
-		father[find(a)] = father[find(b)];
+		father[root(a)] = father[root(b)];
 	}
 };
 
