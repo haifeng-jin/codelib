@@ -57,6 +57,7 @@ double point_dist(Point a)
 
 double point_dist(Point a, Point b)
 {
+	Point p;
 	return point_dist(a - b);
 }
 
