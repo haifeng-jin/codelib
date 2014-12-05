@@ -1,4 +1,4 @@
-const int MAX_CHAR_NUM = 0;
+const int MAX_CHAR_NUM = 30;
 const int MAX_NODE_NUM = 0;
 
 int trie[MAX_NODE_NUM][MAX_CHAR_NUM];
