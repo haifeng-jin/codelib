@@ -1,4 +1,0 @@
-int node_num, edge_num;
-long long dist[MAX_NODE_NUM];
-vector<pair<int, int> > edge[MAX_NODE_NUM];
-
