@@ -1,12 +1,12 @@
 
-struct Disjoint_sets
+struct DSU
 {
 	int father[MAX_NODE_NUM];
 
-	Disjoint_sets()
+	DSU()
 	{}
 
-	Disjoint_sets(int n)
+	DSU(int n)
 	{
 		for (int i = 0; i < n; i++)
 		{
@@ -14,7 +14,7 @@ struct Disjoint_sets
 		}
 	}
 
-	int root(int a)
+	int find(int a)
 	{
 		int ret = a;
 		while (father[ret] != ret)
@@ -28,9 +28,9 @@ struct Disjoint_sets
 		return ret;
 	}
 
-	void join(int a, int b)
+	void merge(int a, int b)
 	{
-		father[root(a)] = father[root(b)];
+		father[find(a)] = father[find(b)];
 	}
 };
 
