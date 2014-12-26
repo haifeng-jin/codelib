@@ -24,6 +24,8 @@ void add_edge(int u, int v, int f)
 {
 	edge[edge_cnt] = Edge(head[u], v, f);
 	head[u] = edge_cnt++;
+	edge[edge_cnt] = Edge(head[v], u, 0);
+	head[v] = edge_cnt++;
 }
 
 void init()
