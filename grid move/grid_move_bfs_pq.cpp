@@ -106,7 +106,7 @@ int bfs()
 		for (int i = 0; i < 4; i++)
 		{
 			Point v = u + dir[i];
-			if (out(v) || grid[v.x][v.y] == '#')
+			if (out(v) || grid[v.x][v.y] != '.')
 			{
 				continue;
 			}
