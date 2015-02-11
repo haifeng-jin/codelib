@@ -1,64 +1,53 @@
-#include <cstdio>
-#include <cstring>
-using namespace std;
 
-#define D(x) x
+const int MAX_DIGIT = 20;
 
-const int MAX_DIGIT = 35;
-
-int n, m;
+long long n;
 int f[MAX_DIGIT];
-int memoize[MAX_DIGIT][2][2][2][13];
+long long memoize[MAX_DIGIT][20*20*9];
+int pivot;
 
-void to_digits(int a)
+int to_digits(long long a)
 {
-	for (int i = 0; i < MAX_DIGIT; i++)
+	int ret = 0;
+	while (a > 0)
 	{
-		f[i] = a % 10;
+		f[++ret] = a % 10;
 		a /= 10;
 	}
-}
-
-int dfs(int digit, bool less, bool contain, bool one, int remain)
-{
-	if (digit == -1)
-	{
-		return contain && !remain;
-	}
-	if (memoize[digit][less][contain][one][remain] != -1)
-	{
-		return memoize[digit][less][contain][one][remain];
-	}
-	int limit = less ? 9 : f[digit];
-	int ret = 0;
-	for (int i = 0; i <= limit; i++)
-	{
-		int new_remain = (remain * 10 + i) % 13;
-		if (i == 3  && one)
-		{
-			ret += dfs(digit - 1, less || i < f[digit], true, false, new_remain);
-			continue;
-		}
-		if (i == 1)
-		{
-			ret += dfs(digit - 1, less || i < f[digit], contain, true, new_remain);
-			continue;
-		}
-		ret += dfs(digit - 1, less || i < f[digit], contain, false, new_remain);
-	}
-	memoize[digit][less][contain][one][remain] = ret;
 	return ret;
 }
 
-int main()
+long long dfs(int digit, bool less, int weight)
 {
-	while (scanf("%d", &n) != EOF)
+	if (digit <= 0)
 	{
-		to_digits(n);
-		memset(memoize, -1, sizeof(memoize));
-		int ans = dfs(32, false, false, false, 0);
-		printf("%d\n", ans);
+		return weight == 0;
 	}
-	return 0;
+	if (less && memoize[digit][weight] != -1)
+	{
+		return memoize[digit][weight];
+	}
+	int limit = less ? 9 : f[digit];
+	long long ret = 0;
+	for (int i = 0; i <= limit; i++)
+	{
+		int new_weight = weight + (digit - pivot) * i;
+		if (new_weight < 0)
+		{
+			continue;
+		}
+		ret += dfs(digit - 1, less || i < f[digit], new_weight);
+	}
+	memoize[digit][weight] = ret;
+	return ret;
 }
 
+long long work(long long n)
+{
+	if (n < 0)
+	{
+		return 0;
+	}
+	int len = to_digits(n);
+	return dfs(len, false, 0);
+}
