@@ -15,13 +15,13 @@ int to_digits(long long a)
 	return ret;
 }
 
-long long dfs(int digit, bool less, ...)
+long long dfs(int digit, bool less, bool leading_zero, ...)
 {
 	if (digit < 0)
 	{
 		return ...;
 	}
-	if (less && memoize[digit][...] != -1)
+	if (less && !leading_zero && memoize[digit][...] != -1)
 	{
 		return memoize[digit][...];
 	}
@@ -29,9 +29,9 @@ long long dfs(int digit, bool less, ...)
 	long long ret = 0;
 	for (int i = 0; i <= limit; i++)
 	{
-		ret += dfs(digit - 1, less || i < f[digit], ...);
+		ret += dfs(digit - 1, less || i < f[digit], leading_zero && i == 0, ...);
 	}
-	if (less)
+	if (less && !leading_zero)
 	{
 		memoize[digit][...] = ret;
 	}
@@ -50,5 +50,5 @@ long long work(long long n)
 	}
 	int len = to_digits(n);
 	memset(memoize, -1, sizeof(memoize));
-	return dfs(len - 1, false, ...);
+	return dfs(len - 1, false, 0, ...);
 }
