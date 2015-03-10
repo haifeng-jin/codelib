@@ -74,7 +74,6 @@ void build_ac_automation(node *root)
 				else
 				{
 					temp->next[i]->fail = p->next[i];
-					temp->next[i]->count += p->next[i]->count;
 				}
 				q.push(temp->next[i]);
 			}else
@@ -98,12 +97,10 @@ int query(node *root, char* str)
 		p = p->next[index];
 		p = (p == NULL) ? root : p;
 		node *temp = p;
-		if (temp->count > 0)
-			cnt += temp->count;
-		//the following "while" marks count as -1 to prevent from matching again
-		while (temp != root && temp->count != -1)
+		while (temp != root)
 		{
-			temp->count = -1;
+			cnt += temp->count;
+			temp->count = 0; // prevent from matching it again.
 			temp = temp->fail;
 		}
 	}
