@@ -1,15 +1,17 @@
 /*
 	ac_init();
 	//insert strings to it here
+	insert(root, st);
 	build_ac_automation(root);
 	Matrix matrix;
 	extract_matrix(matrix);
 */
 
-#define MAX_CHILD_NUM 0
-#define MAX_NODE_NUM 0
-#define MAX_MATRIX_SIZE 101
-#define MOD 100000
+const int MAX_CHILD_NUM = 0;
+const int MAX_NODE_NUM = 0;
+const int MAX_MATRIX_SIZE = 0;
+const int MOD = 0;
+
 
 int matrix_size;
 int node_cnt;
@@ -96,8 +98,9 @@ int query(node *root, char* str)
 		p = p->next[index];
 		p = (p == NULL) ? root : p;
 		node *temp = p;
-		cnt += temp->count;
-		//marks count as -1 to prevent from matching again
+		if (temp->count > 0)
+			cnt += temp->count;
+		//the following "while" marks count as -1 to prevent from matching again
 		while (temp != root && temp->count != -1)
 		{
 			temp->count = -1;
