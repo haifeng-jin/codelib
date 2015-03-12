@@ -1,111 +1,107 @@
-/*
-	ac_init();
-	//insert strings to it here
-	insert(root, st);
-	build_ac_automation(root);
-	Matrix matrix;
-	extract_matrix(matrix);
-*/
 
-const int MAX_CHILD_NUM = 0;
-const int MAX_NODE_NUM = 0;
-const int MAX_MATRIX_SIZE = 0;
-const int MOD = 0;
-
-
-int matrix_size;
-int node_cnt;
-
-struct node
+struct Trie
 {
-	node *fail;
-	node *next[MAX_CHILD_NUM];
-	int count; //how many words are matched when reach this node(the sum of its fail nodes' count)
-}trie[MAX_NODE_NUM], *root = trie;
+	int next[MAX_NODE_NUM][MAX_CHILD_NUM];
+	int fail[MAX_NODE_NUM];
+	int count[MAX_NODE_NUM];
+	int node_cnt;
+	int root;
 
-void ac_init()
-{
-	memset(trie, 0, sizeof(trie));
-	node_cnt = 1;
-}
-
-int get_id(char ch)
-{
-	return ch - 'a';
-}
-
-void insert(node *root, char *str)
-{
-	node *p = root;
-	int index;
-	for (int i = 0; str[i]; i++)
+	void init()
 	{
-		index = get_id(str[i]);
-		if (p->next[index] == NULL)
-		{
-			p->next[index] = trie + node_cnt;
-			node_cnt++;
-		}
-		p = p->next[index];
+		node_cnt = 0;
+		root = newnode();
 	}
-	p->count++;
-}
 
-void build_ac_automation(node *root)
-{
-	queue<node*> q;
-	int i;
-	root->fail = NULL;
-	q.push(root);
-	while (!q.empty())
+	int newnode()
 	{
-		node *temp = q.front();
-		q.pop();
-		node *p = NULL;
-		for (i = 0; i < MAX_CHILD_NUM; i++)
+		for (int i = 0; i < 26; i++)
+			next[node_cnt][i] = -1;
+		count[node_cnt++] = 0;
+		return node_cnt - 1;
+	}
+
+	int get_id(char a)
+	{
+		return a - 'A';
+	}
+
+	void insert(char buf[])
+	{
+		int len = strlen(buf);
+		int now = root;
+		D(printf("%d\n", root));
+		for (int i = 0; i < len; i++)
 		{
-			p = temp->fail;
-			while (p != NULL && p->next[i] == NULL)
-				p = p->fail;
-			if (temp->next[i] != NULL)
+			int id = get_id(buf[i]);
+			if (next[now][id] == -1)
+				next[now][id] = newnode();
+			now = next[now][id];
+		}
+		count[now]++;
+	}
+
+	void build()
+	{
+		queue<int>Q;
+		fail[root] = root;
+		for (int i = 0; i < 26; i++)
+			if (next[root][i] == -1)
+				next[root][i] = root;
+			else
 			{
-				if (p == NULL)
-					temp->next[i]->fail = root;
+				fail[next[root][i]] = root;
+				Q.push(next[root][i]);
+			}
+		while (!Q.empty())
+		{
+			int now = Q.front();
+			Q.pop();
+			for (int i = 0; i < 26; i++)
+				if (next[now][i] == -1)
+					next[now][i] = next[fail[now]][i];
 				else
 				{
-					temp->next[i]->fail = p->next[i];
+					fail[next[now][i]]=next[fail[now]][i];
+					Q.push(next[now][i]);
 				}
-				q.push(temp->next[i]);
-			}else
+		}
+	}
+
+	int query(char buf[])
+	{
+		int len = strlen(buf);
+		int now = root;
+		int res = 0;
+		for (int i = 0; i < len; i++)
+		{
+			now = next[now][get_id(buf[i])];
+			int temp = now;
+			while (temp != root && count[temp] >= 0)
 			{
-				if (p == NULL)
-					temp->next[i] = root;
-				else
-					temp->next[i] = p->next[i];
+				res += count[temp];
+ 				// optimization: prevent from searching this fail chain again.
+				//also prevent matching again.
+
+				count[temp] = -1;
+				temp = fail[temp];
 			}
 		}
+		return res;
 	}
-}
 
-int query(node *root, char* str)
-{
-	int cnt = 0, index;
-	node *p = root;
-	for (int i = 0; str[i]; i++)
+	void debug()
 	{
-		index = get_id(str[i]);
-		p = p->next[index];
-		p = (p == NULL) ? root : p;
-		node *temp = p;
-		while (temp != root)
+		for(int i = 0;i < node_cnt;i++)
 		{
-			cnt += temp->count;
-			temp->count = 0; // prevent from matching it again.
-			temp = temp->fail;
+			printf("id = %3d,fail = %3d,end = %3d,chi = [",i,fail[i],count[i]);
+			for(int j = 0;j < 26;j++)
+				printf("%2d",next[i][j]);
+			printf("]\n");
 		}
 	}
-	return cnt;
-}
+}ac;
+
 
 struct Matrix
 {
@@ -189,16 +185,16 @@ Matrix matrix_power(Matrix ma, int x)
 
 void extract_matrix(Matrix &matrix)
 {
-	matrix.order = node_cnt;
+	matrix.order = ac.node_cnt;
 	matrix.init();
-	for (int i = 0; i < node_cnt; i++)
+	for (int i = 0; i < ac.node_cnt; i++)
 	{
 		for (int j = 0; j < MAX_CHILD_NUM; j++)
 		{
-			if (trie[i].next[j] == NULL)
+			if (ac.next[i][j] == NULL)
 				continue;
-			int temp = trie[i].next[j] - trie;
-			if (trie[temp].count == 0)
+			int temp = ac.next[i][j];
+			if (ac.count[temp] == 0)
 			{
 				matrix.num[i][temp] += 1;
 			}
