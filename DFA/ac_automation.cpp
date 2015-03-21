@@ -5,6 +5,7 @@ struct Trie
 	int fail[MAX_NODE_NUM];
 	int count[MAX_NODE_NUM];
 	int node_cnt;
+	bool vis[MAX_NODE_NUM]; //set it to false
 	int root;
 
 	void init()
@@ -15,7 +16,7 @@ struct Trie
 
 	int newnode()
 	{
-		for (int i = 0; i < 26; i++)
+		for (int i = 0; i < MAX_CHILD_NUM; i++)
 			next[node_cnt][i] = -1;
 		count[node_cnt++] = 0;
 		return node_cnt - 1;
@@ -28,10 +29,8 @@ struct Trie
 
 	void insert(char buf[])
 	{
-		int len = strlen(buf);
 		int now = root;
-		D(printf("%d\n", root));
-		for (int i = 0; i < len; i++)
+		for (int i = 0; buf[i]; i++)
 		{
 			int id = get_id(buf[i]);
 			if (next[now][id] == -1)
@@ -45,7 +44,7 @@ struct Trie
 	{
 		queue<int>Q;
 		fail[root] = root;
-		for (int i = 0; i < 26; i++)
+		for (int i = 0; i < MAX_CHILD_NUM; i++)
 			if (next[root][i] == -1)
 				next[root][i] = root;
 			else
@@ -57,7 +56,7 @@ struct Trie
 		{
 			int now = Q.front();
 			Q.pop();
-			for (int i = 0; i < 26; i++)
+			for (int i = 0; i < MAX_CHILD_NUM; i++)
 				if (next[now][i] == -1)
 					next[now][i] = next[fail[now]][i];
 				else
@@ -70,20 +69,20 @@ struct Trie
 
 	int query(char buf[])
 	{
-		int len = strlen(buf);
 		int now = root;
 		int res = 0;
-		for (int i = 0; i < len; i++)
+
+		memset(vis, 0, sizeof(vis));
+		for (int i = 0; buf[i]; i++)
 		{
 			now = next[now][get_id(buf[i])];
 			int temp = now;
-			while (temp != root && count[temp] >= 0)
+			while (temp != root && !vis[temp])
 			{
 				res += count[temp];
  				// optimization: prevent from searching this fail chain again.
 				//also prevent matching again.
-
-				count[temp] = -1;
+				vis[temp] = true;
 				temp = fail[temp];
 			}
 		}
@@ -95,7 +94,7 @@ struct Trie
 		for(int i = 0;i < node_cnt;i++)
 		{
 			printf("id = %3d,fail = %3d,end = %3d,chi = [",i,fail[i],count[i]);
-			for(int j = 0;j < 26;j++)
+			for(int j = 0;j < MAX_CHILD_NUM;j++)
 				printf("%2d",next[i][j]);
 			printf("]\n");
 		}
