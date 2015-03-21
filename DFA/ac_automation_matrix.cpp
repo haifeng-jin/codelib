@@ -11,6 +11,7 @@ struct Trie
 	{
 		node_cnt = 0;
 		root = newnode();
+		memset(vis, 0, sizeof(vis));
 	}
 
 	int newnode()
