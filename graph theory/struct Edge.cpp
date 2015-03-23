@@ -8,19 +8,33 @@ struct Edge
 	{}
 	Edge(int v, int next):v(v), next(next)
 	{}
-} edge[MAX_EDGE_NUM];
+};
 
-int head[MAX_NODE_NUM];
-int edge_cnt;
-
-void init_edge()
+struct Graph
 {
-	memset(head, -1, sizeof(head));
-	edge_cnt = 0;
-}
+	int head[MAX_NODE_NUM];
+	int edge_cnt;
+	Edge edge[MAX_EDGE_NUM];
 
-void add_edge(int u, int v)
-{
-	edge[edge_cnt] = Edge(v, head[u]);
-	head[u] = edge_cnt++;
-}
+	void init()
+	{
+		memset(head, -1, sizeof(head));
+		edge_cnt = 0;
+	}
+
+	void add(int u, int v)
+	{
+		edge[edge_cnt] = Edge(v, head[u]);
+		head[u] = edge_cnt++;
+	}
+
+	int next(int a)
+	{
+		return edge[a].next;
+	}
+
+	int v(int a)
+	{
+		return edge[a].v;
+	}
+};
