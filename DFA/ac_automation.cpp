@@ -1,4 +1,4 @@
-
+//1.init() 2.insert() 3.build() 4.query()
 struct Trie
 {
 	int next[MAX_NODE_NUM][MAX_CHILD_NUM];
