@@ -85,7 +85,7 @@ bool same_side(Point p1, Point p2, Line l)
 
 bool point_online_inclusive(Point p, Line l)
 {
-	return double_cmp(zero(cross_product(p, l.a, l.b)) && dot_product(p, l.a, l.b)) <= 0;
+	return zero(cross_product(p, l.a, l.b)) && double_cmp(dot_product(p, l.a, l.b)) <= 0;
 }
 
 bool point_online_exclusive(Point p, Line l)
@@ -143,7 +143,7 @@ struct Polygon
 	int point_num;
 };
 
-bool convex(Polygon &a) //point should be counter-clockwise
+bool is_convex(Polygon &a) //point should be counter-clockwise
 {
 	for (int i = 0; i < a.point_num; i++)
 	{
@@ -165,4 +165,40 @@ bool point_in_convex(Polygon &a, Point peg) //point should be counter-clockwise
 			return false;
 	}
 	return true;
+}
+
+bool graham_cmp(const Point &a, const Point &b)
+{
+	return a.y < b.y || (a.y == b.y && a.x < b.x);
+}
+
+bool graham_ok(Point &a, Point &b, Point &c)
+{
+	return double_cmp(cross_product(a, b, c)) >= 0;
+}
+
+int graham(Point point[], int n, Point ret[]){
+	int top = 0;
+	sort(point, point + n, graham_cmp);
+	for (int i = 0; i < 2; i++)
+		ret[top++] = point[i];
+
+	if (n <= 2)
+		return n;
+
+	for (int i = 2; i < n; i++)
+	{
+		while (top >= 2 && graham_ok(ret[top - 1], ret[top - 2], point[i]))
+			top--;
+		ret[top++] = point[i];
+	}
+	int len = top;
+	ret[top++] = point[n - 2];
+	for (int i = n - 3; i >= 0; i--)
+	{
+		while (top > len && graham_ok(ret[top - 1], ret[top - 2], point[i]))
+			top--;
+		ret[top++] = point[i];
+	}
+	return top;
 }
