@@ -1,10 +1,10 @@
-int binary_search(int start, int end, int a)
+LL binary_search(LL start, LL end, LL a)
 {
-	int l = start;
-	int r = end;
+	LL l = start;
+	LL r = end;
 	while (l < r)
 	{
-		int mid = (l + r) / 2;
+		LL mid = (l + r) / 2;
 		if (ok(mid, a))
 			r = mid;
 		else
