@@ -2,7 +2,7 @@
 #define MAX_Y MAX_X
 #define MAX_EDGE_NUM 0
 #define MAX_NODE_NUM MAX_X
-
+//if xi and yj are connected, add (i, j) as an edge.
 struct Edge
 {
 	int v, next;
@@ -56,7 +56,7 @@ int max_match()
 		find_match(i);
 	}
 	int ans = 0;
-	for (int i = 0; i < x_num; i++)
+	for (int i = 0; i < y_num; i++)
 		if (match[i] != -1)
 			ans++;
 	return ans;

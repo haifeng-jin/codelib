@@ -30,7 +30,7 @@ int max_match()
 		find_match(i);
 	}
 	int ans = 0;
-	for (int i = 0; i < x_num; i++)
+	for (int i = 0; i < y_num; i++)
 		if (match[i] != -1)
 			ans++;
 	return ans;
