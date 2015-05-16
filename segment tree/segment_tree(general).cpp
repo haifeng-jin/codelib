@@ -1,3 +1,4 @@
+
 struct SegmentTree
 {
 
@@ -48,36 +49,37 @@ struct SegmentTree
 
     void update(Node *proot, int start, int end, int value)
     {
-        if (start > proot->r || end < proot->l)
-            return;
-        start = max(start, proot->l);
-        end = min(end, proot->r);
-        if (start == proot->l && end == proot->r)
-        {
-            //do something
-            return;
-        }
-        push_down(proot);
-        update(proot->pleft, start, end, value);
-        update(proot->pright, start, end, value);
-        pull_up(proot);
+	    if (start > proot->r || end < proot->l)
+		    return;
+	    start = max(start, proot->l);
+	    end = min(end, proot->r);
+	    if (start == proot->l && end == proot->r)
+	    {
+		    //do something
+		    return;
+	    }
+	    push_down(proot);
+	    update(proot->pleft, start, end, value);
+	    update(proot->pright, start, end, value);
+	    pull_up(proot);
     }
 
     int query(Node *proot, int start, int end)
     {
-        int ret = proot->value;
-        if (start > proot->r || end < proot->l)
-            return 0;
-        start = max(start, proot->l);
-        end = min(end, proot->r);
-        if (start == proot->l && end == proot->r)
-        {
-            //do something
-        }
-        push_down(proot);
-        ret = max(ret, query(proot->pleft, start, end));
-        ret = max(ret, query(proot->pright, start, end));
-        pull_up(proot);
-        return ret;
+	    int ret = 0;
+	    if (start > proot->r || end < proot->l)
+		    return 0;
+	    start = max(start, proot->l);
+	    end = min(end, proot->r);
+	    if (start == proot->l && end == proot->r)
+	    {
+		    //do something
+		    return;
+	    }
+	    push_down(proot);
+	    ret = max(ret, query(proot->pleft, start, end));
+	    ret = max(ret, query(proot->pright, start, end));
+	    pull_up(proot);
+	    return ret;
     }
 };
