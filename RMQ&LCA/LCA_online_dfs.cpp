@@ -1,16 +1,17 @@
-//first call init_LCA(root).
-//then call LCA(a, b) to quest the LCA of a and b.
+//first, call init_edge() and add all the edges using add_edge()
+//then, call init_LCA(root).
+//finally, call LCA(a, b) to quest the LCA of a and b.
 //the graph can be both bidirected or unidirected.
-#define MAX_NODE_NUM 0
-#define MAX_EDGE_NUM 0
-#define M 30
+const int MAX_NODE_NUM = 0;
+const int MAX_EDGE = 0;
+const int M= 0;
 
 struct Edge
 {
-	int v, next, id;
+	int v, next;
 	Edge()
 	{}
-	Edge(int v, int next, int id):v(v), next(next), id(id)
+	Edge(int v, int next):v(v), next(next)
 	{}
 } edge[MAX_EDGE_NUM];
 
@@ -23,9 +24,9 @@ void init_edge()
 	edge_cnt = 0;
 }
 
-void add_edge(int u, int v, int id)
+void add_edge(int u, int v)
 {
-	edge[edge_cnt] = Edge(v, head[u], id);
+	edge[edge_cnt] = Edge(v, head[u]);
 	head[u] = edge_cnt++;
 }
 
@@ -133,5 +134,3 @@ int LCA(int u ,int v)
 	int res = query(x, y);
 	return seq[res];
 }
-
-
