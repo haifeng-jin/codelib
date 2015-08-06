@@ -1,3 +1,5 @@
+void enumerate(int bit_num)
+{
 	for (int i = 1; i < (1 << bit_num); i++)
 	{
 		//i is the 01-bits sequence
@@ -9,4 +11,4 @@
 			}
 		}
 	}
-
+}
