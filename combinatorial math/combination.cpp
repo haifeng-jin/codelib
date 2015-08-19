@@ -59,11 +59,15 @@ void init_comb(int n)
     }
 }
 
+//choose b from a
 long long comb(long long a, long long b)
 {
-    long long ret = factorial[a] * inverse[a - b];
-    ret %= MOD;
-    ret *= inverse[b];
-    ret %= MOD;
-    return ret;
+	if (b == 0)
+		return 1;
+	long long ret = factorial[a] * inverse[a - b];
+	ret %= MOD;
+	ret *= inverse[b];
+	ret %= MOD;
+	return ret;
 }
+
