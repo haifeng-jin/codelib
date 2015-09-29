@@ -1,3 +1,7 @@
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
 double random_double()
 {
 	return rand() * 1.0 / RAND_MAX;

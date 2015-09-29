@@ -43,7 +43,7 @@ void init_RMQ(int f[], int n)
 	}
 }
 
-int query(int x, int y)
+int query(int f[], int x, int y)
 {
 	if(x > y)
 	{
@@ -52,7 +52,7 @@ int query(int x, int y)
 	int k = ln[y - x + 1];
 	//for maximum, change ">" to "<"
 	//for the last, change "<" or ">" to "<=" or ">="
-	if (depth[st[x][k]] > depth[st[y - power[k] + 1][k]])
+	if (f[st[x][k]] > f[st[y - power[k] + 1][k]])
 		return st[y - power[k] + 1][k];
 	return st[x][k];
 }
