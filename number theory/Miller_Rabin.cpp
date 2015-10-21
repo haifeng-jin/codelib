@@ -2,9 +2,6 @@ typedef long long LL;
 #define maxn 10000
 const int S = 20;
 
-LL factor[maxn];
-int tot;
-
 LL multi_mod(LL a, LL b, LL c)
 {    //返回(a*b) mod c,a,b,c<2^63
 	a %= c;

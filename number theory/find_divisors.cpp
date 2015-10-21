@@ -1,9 +1,7 @@
 /*
 	MAXN is the number of factors
 	S is the number of seeds for Miller_Rabin
-	Initialize tot=0;
-	Call find_prime_factor(n) to find all the prime factors and save them in prime_factor[].
-	The total number of prime factors is in tot.
+	Call find_divisor(n) to find all the divisors of n.
 */
 typedef long long LL;
 const int MAXN = 10000;
@@ -137,4 +135,51 @@ void find_prime_factor(LL n)
 	find_prime_factor(p);
 	find_prime_factor(n / p);
 }
+
+
+void dfs(int step, long long product)
+{
+	if (step >= unique_num)
+	{
+		divisor[divisor_num++] = product;
+		return;
+	}
+	long long temp = 1;
+	for (int i = 0; i <= unique_factor[step].second; i++)
+	{
+		dfs(step + 1, product * temp);
+		temp *= unique_factor[step].first;
+	}
+}
+
+void make_unique()
+{
+	unique_num = 0;
+	unique_factor[0] = make_pair(prime_factor[0], 1);
+		
+	for (int i = 1; i < prime_factor_num; i++)
+	{
+		if (prime_factor[i] == unique_factor[unique_num].first)
+		{
+			unique_factor[unique_num].second++;
+			continue;
+		}
+		unique_num++;
+		unique_factor[unique_num] = make_pair(prime_factor[i], 1);
+	}
+	unique_num++;
+}
+
+void find_divisor(long long n)
+{
+	prime_factor_num = 0;
+	find_prime_factor(n);
+	sort(prime_factor, prime_factor + prime_factor_num);
+
+	make_unique();
+	divisor_num = 0;
+	dfs(0, 1);
+	sort(divisor, divisor + divisor_num);
+}
+
 
