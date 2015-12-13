@@ -8,7 +8,7 @@ int ln[MAX_NODE_NUM * 2];
 void init_RMQ(int f[], int n)
 {
 	int i, j;
-	for (power[0] = 1, i = 1; i < 21; i++)
+	for (power[0] = 1, i = 1; i < 31; i++)
 	{
 		power[i] = 2 * power[i - 1];
 	}
@@ -21,7 +21,7 @@ void init_RMQ(int f[], int n)
 	{
 		ln[i] = ln[i >> 1] + 1;
 	}
-	for (j = 1; j < ln[n]; j++)
+	for (j = 1; j <= ln[n]; j++)
 	{
 		for (i = 0; i < n; i++)
 		{
