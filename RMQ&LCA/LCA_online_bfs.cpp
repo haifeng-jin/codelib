@@ -1,14 +1,17 @@
-#define MAX_NODE_NUM 0
-#define MAX_EDGE_NUM 0
-#define MAX_Q_LEN MAX_NODE_NUM
-#define M 30
+//1.call init_edge() and use add_edge() to insert all the edges.
+//2.call init_LCA()
+//3.call LCA(a, b) to get the LCA of a and b.
+const int MAX_NODE_NUM = 0;
+const int MAX_EDGE_NUM = 0;
+const int MAX_Q_LEN = MAX_NODE_NUM;
+const int M = 30;
 
 struct Edge
 {
-	int v, next, id;
+	int v, next, w;
 	Edge()
 	{}
-	Edge(int v, int next, int id):v(v), next(next), id(id)
+	Edge(int v, int next, int w):v(v), next(next), w(w)
 	{}
 } edge[MAX_EDGE_NUM];
 
@@ -21,9 +24,9 @@ void init_edge()
 	edge_cnt = 0;
 }
 
-void add_edge(int u, int v, int id)
+void add_edge(int u, int v, int w)
 {
-	edge[edge_cnt] = Edge(v, head[u], id);
+	edge[edge_cnt] = Edge(v, head[u], w);
 	head[u] = edge_cnt++;
 }
 
@@ -72,13 +75,11 @@ void bfs(int root)
 {
 	queue<int> q;
 	q.push(root);
-	seq2_cnt = 0;
 	while (!q.empty())
 	{
 		int u = q.front();
 		q.pop();
 		vis[u] = true;
-		seq2[seq2_cnt++] = u;
 		for (int i = head[u]; i != -1; i = edge[i].next)
 		{
 			int v = edge[i].v;
@@ -93,7 +94,7 @@ void bfs(int root)
 	}
 }
 
-//index start from 1.
+//index of the nodes start from 1.
 void init_LCA(int root)
 {
 	fill_n(vis, node_num + 1, 0);
