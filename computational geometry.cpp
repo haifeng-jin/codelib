@@ -202,3 +202,22 @@ int graham(Point point[], int n, Point ret[]){
 	}
 	return top;
 }
+
+//The points can be either clockwise or counter-clockwise.
+//It counts on the boundary of the polygon as in the polygon.
+bool point_in_polygon(Polygon polygon, Point peg)
+{
+	int n = polygon.point_num;
+	double ret = 0;
+	for (int i = 0; i < n; i++)
+	{
+		Point a = polygon.point[i] - peg;
+		Point b = polygon.point[(i + 1) % n] - peg;
+		double dot = dot_product(a, b);
+		dot /= point_dist(a);
+		dot /= point_dist(b);
+		ret += acos(dot) * double_cmp(cross_product(a, b));
+	}
+	return double_cmp(ret) != 0;
+}
+
