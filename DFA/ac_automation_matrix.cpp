@@ -192,10 +192,7 @@ void extract_matrix(Matrix &matrix)
 			if (ac.next[i][j] == NULL)
 				continue;
 			int temp = ac.next[i][j];
-			if (ac.count[temp] == 0)
-			{
-				matrix.num[i][temp] += 1;
-			}
+			matrix.num[i][temp] += 1; //add an edge to matrix from i to temp
 		}
 	}
 }
