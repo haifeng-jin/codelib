@@ -10,6 +10,12 @@ void print_vector(const auto& vec) {
     cout << endl;
 }
 
+void print_vector_2d(const auto& vec) {
+    for (auto& row: vec) {
+        print_vector(row);
+    }    
+}
+
 void vector_1d() {
     // Initialize a 1-d vector with a constant.
     auto vec = vector<int> (10, 1);
@@ -20,9 +26,7 @@ void vector_2d() {
     // Initialize a 2-d (3 by 4) vector.
     // The 5 is constant initial value, which is optional.
     vector<vector<int>> vec(3, vector<int>(4, 5));
-    for (auto& row: vec) {
-        print_vector(row);
-    }
+    print_vector_2d(vec);
 }
 
 void vector_sort() {
@@ -67,11 +71,69 @@ void vector_sort_pair() {
     print_pair_vector(vec);
 }
 
+void vector_copy() {
+    vector<int> original = {1, 2, 3, 4, 5};
+
+    // We show 4 different methods here.
+
+    vector<int> copy_a(original);
+    
+    vector<int> copy_b = original;
+    
+    vector<int> copy_c;
+    copy_c.assign(original.begin(), original.end());
+    
+    vector<int> copy_d(original.size());
+    copy(original.begin(), original.end(), copy_d.begin());
+    
+    // Change the value of the original.
+    original[2] = 100;
+    
+    // The copied vectors did not change.
+    print_vector(original);
+    print_vector(copy_a);    
+    print_vector(copy_b);
+    print_vector(copy_c);
+    print_vector(copy_d);
+}
+
+void vector_2d_copy() {
+    // Initialize a 2D vector
+    vector<vector<int>> original = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+    // Use the copy constructor to create a new 2D vector
+    vector<vector<int>> copy_a(original);
+
+    vector<vector<int>> copy_b = original;
+    
+    vector<vector<int>> copy_c;
+    copy_c.assign(original.begin(), original.end());
+    
+    vector<vector<int>> copy_d(original.size());
+    copy(original.begin(), original.end(), copy_d.begin());
+    
+    // Change the value of the original.
+    original[1][1] = 100;
+    
+    // The copied vectors did not change.
+    print_vector_2d(original);
+    print_vector_2d(copy_a);
+    print_vector_2d(copy_b);
+    print_vector_2d(copy_c);
+    print_vector_2d(copy_d);
+}
+
 int main() {
     vector_1d();
     vector_2d();
     vector_sort();
     vector_sort_descending();
     vector_sort_pair();
+    vector_copy();
+    vector_2d_copy();
     return 0;
 }
