@@ -52,9 +52,23 @@ void vector_sort_pair() {
     print_pair_vector(vec);
 }
 
+void vector_copy() {
+    vector<int> original = {1, 2, 3, 4, 5};
+    vector<int> vec(original.size());
+    copy(original.begin(), original.end(), vec.begin());
+    
+    // Change the value of the original.
+    original[2] = 100;
+    
+    // The copied vectors did not change.
+    print_vector(original);
+    print_vector(vec);
+}
+
 int main() {
     vector_sort();
     vector_sort_descending();
     vector_sort_pair();
+    vector_copy();
     return 0;
 }
