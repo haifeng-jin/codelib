@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <unordered_map>
 using namespace std;
 
 auto initialize() {
@@ -55,6 +56,23 @@ void map_remove(auto ageMap) {
     }
 }
 
+void unordered_map() {
+    // map is a binary search tree.
+    // unordered_map is a hashmap.
+    unordered_map<int, string> myUnorderedMap;
+
+    // Insert elements
+    myUnorderedMap[3] = "Three";
+    myUnorderedMap[1] = "One";
+    myUnorderedMap[4] = "Four";
+    myUnorderedMap[2] = "Two";
+
+    // Elements are not ordered by keys
+    for (const auto& elem : myUnorderedMap) {
+        cout << elem.first << ": " << elem.second << endl;
+    }
+}
+
 int main() {
     auto ageMap = initialize();
     map_insert(ageMap);
@@ -62,5 +80,6 @@ int main() {
     map_find(ageMap);
     map_iterate(ageMap);
     map_remove(ageMap);
+    unordered_map();
     return 0;
 }
