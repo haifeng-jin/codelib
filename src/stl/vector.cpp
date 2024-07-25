@@ -127,6 +127,14 @@ void vector_2d_copy() {
     print_vector_2d(copy_d);
 }
 
+void vector_insert_delete() {
+    vector<int> vec = {1, 2, 3, 4, 5};
+    vec.insert(vec.begin() + 2, 100);
+    vec.erase(vec.begin() + 3);
+    vec.push_back(200);
+    print_vector(vec);
+}
+
 int main() {
     vector_1d();
     vector_2d();
@@ -135,5 +143,6 @@ int main() {
     vector_sort_pair();
     vector_copy();
     vector_2d_copy();
+    vector_insert_delete();
     return 0;
 }
