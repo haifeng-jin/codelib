@@ -56,7 +56,7 @@ void map_remove(auto ageMap) {
     }
 }
 
-void unordered_map() {
+void unordered_map_demo() {
     // map is a binary search tree.
     // unordered_map is a hashmap.
     unordered_map<int, string> myUnorderedMap;
@@ -73,6 +73,17 @@ void unordered_map() {
     }
 }
 
+void multimap_example() {
+    multimap<int, string> myMultimap = {{10, "ten"}, {20, "twenty"}, {20, "twenty-twice"}, {30, "thirty"}, {40, "forty"}, {50, "fifty"}};
+    
+    auto it = myMultimap.find(20);
+    if (it != myMultimap.end()) {
+        cout << "Found key 20 with value: " << it->second << " in multimap" << endl;
+    } else {
+        cout << "20 not found in multimap" << endl;
+    }
+}
+
 int main() {
     auto ageMap = initialize();
     map_insert(ageMap);
@@ -80,6 +91,7 @@ int main() {
     map_find(ageMap);
     map_iterate(ageMap);
     map_remove(ageMap);
-    unordered_map();
+    unordered_map_demo();
+    multimap_example();
     return 0;
 }
