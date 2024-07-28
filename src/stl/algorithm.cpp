@@ -176,7 +176,23 @@ void demo_swap() {
     // Print the vector after swapping
     cout << "Vector after swapping elements at positions 1 and 3: ";
     print_vector(vec);
-    cout << endl;
+}
+
+void demo_remove_if() {
+    // Initialize a vector with some elements
+    vector<int> vec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    // Define a predicate for filtering (e.g., remove even numbers)
+    auto is_even = [](int x) { return x % 2 == 0; };
+
+    // Use std::remove_if reorders the values to be deleted to the end of the vector.
+    // It returns the iterator pointing to the beginning of the elements to be removed.
+    // followed by erase to remove the "removed" elements
+    vec.erase(remove_if(vec.begin(), vec.end(), is_even), vec.end());
+
+    // Print the vector after in-place filtering
+    cout << "Vector after in-place filtering (removing even numbers): ";
+    print_vector(vec);
 }
 
 int main() {
@@ -193,6 +209,7 @@ int main() {
     demo_copy_if();
     demo_find_if();
     demo_swap();
+    demo_remove_if();
 
     return 0;
 }
