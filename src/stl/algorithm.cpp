@@ -166,6 +166,19 @@ void demo_find_if() {
     }
 }
 
+void demo_swap() {
+    // Initialize a vector with some elements
+    vector<int> vec = {1, 2, 3, 4, 5};
+
+    // Swap elements at positions 1 and 3
+    swap(vec[1], vec[3]);
+
+    // Print the vector after swapping
+    cout << "Vector after swapping elements at positions 1 and 3: ";
+    print_vector(vec);
+    cout << endl;
+}
+
 int main() {
     vector_sort();
     vector_sort_descending();
@@ -179,6 +192,7 @@ int main() {
     demo_reverse();
     demo_copy_if();
     demo_find_if();
+    demo_swap();
 
     return 0;
 }
