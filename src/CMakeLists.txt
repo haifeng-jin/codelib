@@ -1,5 +1,5 @@
 # Specify the source files for the main project
-set(SOURCE_FILES grammar.cc binary_search.h binary_search.cc common_header.h)
+set(SOURCE_FILES grammar.cc binary_search.h common_header.h)
 
 # Create the executable for the main project
 add_executable(codelib ${SOURCE_FILES})
