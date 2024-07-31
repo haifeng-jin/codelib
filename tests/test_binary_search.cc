@@ -4,11 +4,11 @@
 using namespace std;
 
 TEST(BinarySearchTest, Test1) {
-  BinarySearch search;
-  EXPECT_EQ(search.search(0, 5, 3), 3);
+  BinarySearch search(3);
+  EXPECT_EQ(search.lower_bound_index(0, 5), 3);
 }
 
 TEST(BinarySearchTest, Test2) {
-  BinarySearch search;
-  EXPECT_EQ(search.search(0, 5, 4), 4);
+  BinarySearch search(4);
+  EXPECT_EQ(search.lower_bound_index(0, 5), 4);
 }

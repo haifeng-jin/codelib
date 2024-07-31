@@ -74,14 +74,14 @@ struct Double {
 // Custom comparison function
 bool compare(const Double& a, const Double& b) { return a.key < b.key; }
 
+// lower bound means the pointer of the first element that is >= the target.
+// The pointer is actually an iterator, too.
 void demo_lower_bound() {
   vector<Double> vec = {{10, "ten"},    {20, "twenty"}, {20, "twenty"},
                         {20, "twenty"}, {30, "thirty"}, {40, "forty"},
                         {50, "fifty"}};
 
   // Find lower bound for an element with key 20 using custom compare function
-  // lower bound means the pointer of the first element that is >= the target.
-  // The pointer is actually an iterator, too.
   Double target = {20, ""};
   auto lb = lower_bound(vec.begin(), vec.end(), target, compare);
 

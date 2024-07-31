@@ -5,31 +5,28 @@
 
 /*
 There should be a split.
-The elements on the left of the split are not OK.
-Return the left most OK element's index.
+The elements on the left of the split are not in the right half.
+Return the left most element's index in the right half.
 */
 class BinarySearch {
-	public:
+ public:
+  LL target = 0;
+  BinarySearch(LL target) : target(target) {}
 
-	BinarySearch() {}
+  bool in_right_half(LL pos) { return pos >= target; }
 
-	bool ok(LL a, LL b) {
-		return a >= b;
-	}
-
-	LL search(LL start, LL end, LL a) {
-		LL l = start;
-		LL r = end;
-		while (l < r)
-		{
-			LL mid = (l + r) / 2;
-			if (ok(mid, a))
-				r = mid;
-			else
-				l = mid + 1;
-		}
-		return l;
-	}
+  LL lower_bound_index(LL start, LL end) {
+    LL left = start;
+    LL right = end;
+    while (left < right) {
+      LL mid = (left + right) / 2;
+      if (in_right_half(mid))
+        right = mid;
+      else
+        left = mid + 1;
+    }
+    return left;
+  }
 };
 
-#endif // BINARY_SEARCH_H
+#endif  // BINARY_SEARCH_H
