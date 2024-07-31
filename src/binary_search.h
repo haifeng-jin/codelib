@@ -15,7 +15,7 @@ class BinarySearch {
 
   bool in_right_half(LL pos) { return pos >= target; }
 
-  LL lower_bound_index(LL start, LL end) {
+  LL lower_bound(LL start, LL end) {
     LL left = start;
     LL right = end;
     while (left < right) {
