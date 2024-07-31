@@ -3,9 +3,11 @@
 using namespace std;
 
 TEST(BinarySearchTest, Test1) {
-    EXPECT_EQ(ok(2, 3), false);
+    BinarySearch search;
+    EXPECT_EQ(search.search(0, 5, 3), 3);
 }
 
 TEST(BinarySearchTest, Test2) {
-    EXPECT_EQ(ok(4, 3), true);
+    BinarySearch search;
+    EXPECT_EQ(search.search(0, 5, 4), 4);
 }
