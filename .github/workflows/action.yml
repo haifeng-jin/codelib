@@ -3,7 +3,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  install-dependencies:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -12,32 +12,20 @@ jobs:
       - name: Install dependencies
         run: bash shell/install-dependencies.sh
 
-  build:
-    runs-on: ubuntu-latest
-    needs: install-dependencies
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Build with CMake
         run: bash shell/build.sh
 
+      - name: Run tests with CTest
+        run: bash shell/test.sh
+
   format-check:
     runs-on: ubuntu-latest
-    needs: install-dependencies
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: bash shell/install-dependencies.sh
 
       - name: Run clang-format check
         run: ./format.sh
-
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Run tests with CTest
-        run: bash shell/test.sh
