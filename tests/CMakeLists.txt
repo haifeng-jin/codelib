@@ -2,7 +2,10 @@
 enable_testing()
 
 # Find all the test files
-set(SOURCE_FILES test_binary_search.cc)
+set(SOURCE_FILES
+  test_binary_search.cc
+  test_discretizer.cc
+)
 
 # Create a test executable
 add_executable(test_runner ${SOURCE_FILES})

@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 
 #include "binary_search.h"
-using namespace std;
 
 TEST(BinarySearchTest, test_lower_bound_double) {
   double target = 3.5;
