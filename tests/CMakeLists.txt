@@ -2,10 +2,10 @@
 enable_testing()
 
 # Find all the test files
-file(GLOB TEST_FILES test_binary_search.cc)
+set(SOURCE_FILES test_binary_search.cc)
 
 # Create a test executable
-add_executable(test_runner ${TEST_FILES} ${CMAKE_SOURCE_DIR}/src/binary_search.h )
+add_executable(test_runner ${SOURCE_FILES})
 
 # Link Google Test to the test executable
 target_link_libraries(
