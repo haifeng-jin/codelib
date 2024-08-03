@@ -8,22 +8,45 @@ There should be a split.
 The elements on the left of the split are not in the right half.
 Return the left most element's index in the right half.
 */
+template <typename T>
 class BinarySearch {
  public:
-  LL target = 0;
-  BinarySearch(LL target) : target(target) {}
+  function<bool(T)> compare;
+  BinarySearch(function<bool(T)> compare) : compare(compare) {}
 
-  bool in_right_half(LL pos) { return pos >= target; }
+  T lower_bound(const T& start, const T& end) {
+    T pos = search(start, end);
 
-  LL lower_bound(LL start, LL end) {
-    LL left = start;
-    LL right = end;
+    if (pos >= end) {
+      throw out_of_range("Target beyond end.");
+    }
+
+    return pos;
+  }
+
+  T upper_bound(const T& start, const T& end) {
+    T pos = search(start, end);
+
+    if (pos >= end) {
+      pos = end - 1;
+    } else if (pos <= start) {
+      throw out_of_range("Target below start.");
+    }
+
+    return pos;
+  }
+
+ private:
+  T search(const T& start, const T& end) {
+    T left = start;
+    T right = end;
     while (left < right) {
-      LL mid = (left + right) / 2;
-      if (in_right_half(mid))
+      T mid = (left + right) / 2;
+      if (compare(mid)) {
         right = mid;
-      else
+      } else {
         left = mid + 1;
+      }
     }
     return left;
   }
