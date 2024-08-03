@@ -33,7 +33,7 @@ class BinarySearch {
       throw out_of_range("Target below start.");
     }
 
-    return pos;
+    return pos - 1;
   }
 
  private:
