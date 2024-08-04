@@ -18,6 +18,7 @@ class Grid {
   vector<Point> directions;
   int num_rows;
   int num_cols;
+  Grid() {}
   Grid(int num_rows, int num_cols, vector<Point> directions = directions_4)
       : num_rows(num_rows), num_cols(num_cols), directions(directions) {
     _visited = Create2DVector<bool>(num_rows, num_cols, false);
