@@ -5,20 +5,21 @@ class Point {
   int x, y;
   Point() {}
   Point(int x, int y) : x(x), y(y) {}
-  Point operator+(const Point& a) { return Point(x + a.x, y + a.y); }
+  Point operator+(const Point& a) const { return Point(x + a.x, y + a.y); }
+  bool operator==(const Point& a) const { return x == a.x && y == a.y; }
 };
-
+vector<Point> directions_4 = {Point(1, 0), Point(0, 1), Point(-1, 0),
+                              Point(0, -1)};
+vector<Point> directions_8 = {Point(1, 0),   Point(0, 1),  Point(-1, 0),
+                              Point(0, -1),  Point(1, -1), Point(-1, 1),
+                              Point(-1, -1), Point(1, 1)};
 class Grid {
  public:
-  vector<Point> directions = {Point(1, 0), Point(0, 1), Point(-1, 0),
-                              Point(0, -1)};
-  // more directions:
-  // vector<Point> directions = {Point(1, 0),   Point(0, 1),  Point(-1, 0),
-  //                             Point(0, -1),  Point(1, -1), Point(-1, 1),
-  //                             Point(-1, -1), Point(1, 1)};
+  vector<Point> directions;
   int num_rows;
   int num_cols;
-  Grid(int num_rows, int num_cols) : num_rows(num_rows), num_cols(num_cols) {
+  Grid(int num_rows, int num_cols, vector<Point> directions = directions_4)
+      : num_rows(num_rows), num_cols(num_cols), directions(directions) {
     _visited = Create2DVector<bool>(num_rows, num_cols, false);
   }
   void visit(Point a) { _visited[a.x][a.y] = true; }
@@ -42,4 +43,4 @@ class Grid {
 
  private:
   vector<vector<bool>> _visited;
-}
+};

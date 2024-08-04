@@ -3,6 +3,7 @@ set(SOURCE_FILES
     common_header.h
     binary_search.h
     discretizer.h
+    grid.h
     grammar.cc
 )
 

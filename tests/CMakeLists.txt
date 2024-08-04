@@ -5,6 +5,7 @@ enable_testing()
 set(SOURCE_FILES
   test_binary_search.cc
   test_discretizer.cc
+  test_grid.cc
 )
 
 # Create a test executable
