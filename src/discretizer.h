@@ -3,7 +3,6 @@
 #ifndef DISCRETIZER_H
 #define DISCRETIZER_H
 
-
 template <typename T>
 class Discretizer {
  public:
@@ -34,9 +33,7 @@ class Discretizer {
     return value_to_index.find(value) != value_to_index.end();
   }
 
-  T get_value(const int& index) const {
-    return index_to_value[index];
-  }
+  T get_value(const int& index) const { return index_to_value[index]; }
 
  private:
   unordered_map<T, int> value_to_index;
