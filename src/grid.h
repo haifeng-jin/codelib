@@ -1,5 +1,8 @@
 #include "common_header.h"
 
+#ifndef GRID_H
+#define GRID_H
+
 class Point {
  public:
   int x, y;
@@ -13,6 +16,9 @@ vector<Point> directions_4 = {Point(1, 0), Point(0, 1), Point(-1, 0),
 vector<Point> directions_8 = {Point(1, 0),   Point(0, 1),  Point(-1, 0),
                               Point(0, -1),  Point(1, -1), Point(-1, 1),
                               Point(-1, -1), Point(1, 1)};
+vector<Point> directions_diagonal = {Point(1, -1), Point(-1, 1), Point(-1, -1),
+                                     Point(1, 1)};
+
 class Grid {
  public:
   vector<Point> directions;
@@ -45,3 +51,5 @@ class Grid {
  private:
   vector<vector<bool>> _visited;
 };
+
+#endif  // GRID_H
