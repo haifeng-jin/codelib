@@ -6,10 +6,20 @@ TEST(DiscretizerTest, DiscretizeExistingValues) {
   vector<int> data = {5, 3, 6, 3, 9, 5, 3};
   Discretizer<int> discretizer(data);
 
-  EXPECT_EQ(discretizer.discretize(3), 1);
-  EXPECT_EQ(discretizer.discretize(5), 0);
-  EXPECT_EQ(discretizer.discretize(6), 2);
-  EXPECT_EQ(discretizer.discretize(9), 3);
+  EXPECT_EQ(discretizer.get_index(3), 1);
+  EXPECT_EQ(discretizer.get_index(5), 0);
+  EXPECT_EQ(discretizer.get_index(6), 2);
+  EXPECT_EQ(discretizer.get_index(9), 3);
+}
+
+TEST(DiscretizerTest, DiscretizeGetValue) {
+  vector<int> data = {5, 3, 6, 3, 9, 5, 3};
+  Discretizer<int> discretizer(data);
+
+  EXPECT_EQ(discretizer.get_value(1), 3);
+  EXPECT_EQ(discretizer.get_value(0), 5);
+  EXPECT_EQ(discretizer.get_value(2), 6);
+  EXPECT_EQ(discretizer.get_value(3), 9);
 }
 
 TEST(DiscretizerTest, DiscretizeSortedValues) {
@@ -17,18 +27,18 @@ TEST(DiscretizerTest, DiscretizeSortedValues) {
   sort(data.begin(), data.end());
   Discretizer<int> discretizer(data);
 
-  EXPECT_EQ(discretizer.discretize(3), 0);
-  EXPECT_EQ(discretizer.discretize(5), 1);
-  EXPECT_EQ(discretizer.discretize(6), 2);
-  EXPECT_EQ(discretizer.discretize(9), 3);
+  EXPECT_EQ(discretizer.get_index(3), 0);
+  EXPECT_EQ(discretizer.get_index(5), 1);
+  EXPECT_EQ(discretizer.get_index(6), 2);
+  EXPECT_EQ(discretizer.get_index(9), 3);
 }
 
 TEST(DiscretizerTest, DiscretizeNewValues) {
   vector<int> data = {5, 3, 6, 3, 9, 5, 3};
   Discretizer<int> discretizer(data);
 
-  EXPECT_EQ(discretizer.discretize(10), 4);
-  EXPECT_EQ(discretizer.discretize(7), 5);
+  EXPECT_EQ(discretizer.get_index(10), 4);
+  EXPECT_EQ(discretizer.get_index(7), 5);
 }
 
 TEST(DiscretizerTest, ContainsValues) {

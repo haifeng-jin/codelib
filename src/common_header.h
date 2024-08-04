@@ -6,8 +6,10 @@ using namespace std;
 
 #define LL long long
 
-// Create a 2D vector.
-// Example: auto my2DVector = create2DVector<int>(3, 4, 0);
+// Example:
+//
+// auto my2DVector = create2DVector<int>(3, 4, 0);
+//
 // It initialize a 2D vector of type int of size 3 rows and 4 columns with
 // initial value of 0.
 template <typename T>
