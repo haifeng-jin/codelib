@@ -1,5 +1,7 @@
 # Specify the source files for the main project
 set(SOURCE_FILES
+    graph/graph.h
+    graph/shortest_path.h
     common_header.h
     binary_search.h
     discretizer.h
