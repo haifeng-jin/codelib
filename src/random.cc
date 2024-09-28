@@ -10,3 +10,5 @@ int random_int(int bound)  // returns 0~bound-1
 }
 
 void init_random() { srand(time(NULL)); }
+
+int main() { return 0; }

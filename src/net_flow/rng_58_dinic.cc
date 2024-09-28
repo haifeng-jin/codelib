@@ -72,8 +72,7 @@ struct MaxFlow {
     int i;
     while (bfs(s, t)) {
       REP(i, V) used[i] = last[i];
-      while (dfs(s, t, F_INF) != 0)
-        ;
+      while (dfs(s, t, F_INF) != 0);
     }
     F ans = 0;
     for (i = last[s]; i >= 0; i = _prev[i]) ans += flow[i];

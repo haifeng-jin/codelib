@@ -1,4 +1,4 @@
-LL multi_mod(LL a, LL b, LL c) {  //返回(a*b) mod c,a,b,c<2^63
+LL multi_mod(LL a, LL b, LL c) {  // 返回(a*b) mod c,a,b,c<2^63
   a %= c;
   b %= c;
   LL ret = 0;
@@ -11,7 +11,7 @@ LL multi_mod(LL a, LL b, LL c) {  //返回(a*b) mod c,a,b,c<2^63
   return ret;
 }
 
-LL pow_mod(LL x, LL n, LL mod) {  //返回x^n mod c ,非递归版
+LL pow_mod(LL x, LL n, LL mod) {  // 返回x^n mod c ,非递归版
   x %= mod;
   if (n == 1) return x;
   LL ret = 1;

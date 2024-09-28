@@ -1,4 +1,4 @@
-LL multi_mod(LL a, LL b, LL c) {  //返回(a*b) mod c,a,b,c<2^63
+LL multi_mod(LL a, LL b, LL c) {  // 返回(a*b) mod c,a,b,c<2^63
   a %= c;
   b %= c;
   LL ret = 0;

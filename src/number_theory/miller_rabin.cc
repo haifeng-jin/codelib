@@ -2,7 +2,7 @@ typedef long long LL;
 #define maxn 10000
 const int S = 20;
 
-LL multi_mod(LL a, LL b, LL c) {  //返回(a*b) mod c,a,b,c<2^63
+LL multi_mod(LL a, LL b, LL c) {  // 返回(a*b) mod c,a,b,c<2^63
   a %= c;
   b %= c;
   LL ret = 0;
@@ -15,7 +15,7 @@ LL multi_mod(LL a, LL b, LL c) {  //返回(a*b) mod c,a,b,c<2^63
   return ret;
 }
 
-LL pow_mod(LL x, LL n, LL mod) {  //返回x^n mod c ,非递归版
+LL pow_mod(LL x, LL n, LL mod) {  // 返回x^n mod c ,非递归版
   x %= mod;
   if (n == 1) return x;
   LL ret = 1;
@@ -27,7 +27,7 @@ LL pow_mod(LL x, LL n, LL mod) {  //返回x^n mod c ,非递归版
   return ret;
 }
 
-bool check(LL a, LL n, LL x, LL t) {  //以a为基，n-1=x*2^t，检验n是不是合数
+bool check(LL a, LL n, LL x, LL t) {  // 以a为基，n-1=x*2^t，检验n是不是合数
   LL ret = pow_mod(a, x, n), last = ret;
   for (int i = 1; i <= t; i++) {
     ret = multi_mod(ret, ret, n);
