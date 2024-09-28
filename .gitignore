@@ -1,3 +1,4 @@
+*.swp
 book.txt
 .vscode
 build/

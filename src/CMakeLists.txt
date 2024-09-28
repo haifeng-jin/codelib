@@ -6,7 +6,7 @@ set(SOURCE_FILES
     binary_search.h
     discretizer.h
     grid.h
-    grammar.cc
+    random.cc
 )
 
 # Create the executable for the main project
