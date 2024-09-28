@@ -25,8 +25,3 @@ TEST(ShortestPathTest, DijkstraAlgorithm) {
   EXPECT_EQ(sp.get_distance(3), 9);
   EXPECT_EQ(sp.get_distance(4), 5);
 }
-
-int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}

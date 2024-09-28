@@ -3,11 +3,13 @@ enable_testing()
 
 # Find all the test files
 set(SOURCE_FILES
+  data_structures/test_disjoint_set.cc
   graph/test_graph.cc
   graph/test_shortest_path.cc
   test_binary_search.cc
   test_discretizer.cc
   test_grid.cc
+  run_tests.cc
 )
 
 # Create a test executable

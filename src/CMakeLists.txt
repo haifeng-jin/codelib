@@ -1,5 +1,6 @@
 # Specify the source files for the main project
 set(SOURCE_FILES
+    data_structures/disjoint_set.h
     graph/graph.h
     graph/shortest_path.h
     common_header.h
