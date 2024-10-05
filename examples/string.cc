@@ -36,6 +36,9 @@ int main() {
   string s3(s1);              // Copy constructor
   string s4 = s1 + " " + s2;  // Concatenation
 
+  vector<char> chars = {'a', 'b', 'c'};
+  string s5 = string(chars.begin(), chars.end()); // from a vector of chars, "abc"
+
   cout << "Concatenated string: " << s4 << endl;  // Output: Hello World
 
   // Input and Output
