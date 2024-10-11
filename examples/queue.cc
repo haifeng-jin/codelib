@@ -65,6 +65,9 @@ void demo_priority_queue() {
     pq.pop();                 // Remove the top element
   }
   cout << endl;
+
+  // Create a min heap;
+  std::priority_queue<int, std::vector<int>, std::greater<int> > my_min_heap;
 }
 
 void demo_stack() {
